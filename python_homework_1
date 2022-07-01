@@ -1,0 +1,55 @@
+# 1. Посмотрите видео Дэвида Бизли про встроенные инструменты Python
+# 2. Попробуйте используя встроенные инструменты Python проанализировать таблицу из файла "Vacancy.csv"
+# 3. Попробуйте ответить на вопросы:
+# Сколько вакансий, которые вам нравятся?
+# За какие периоды эти вакансии?
+# Сколько вакансий с такими позициями, на которых вы работаете?
+# Сколько вакансий для аналитика данных?
+# Сколько вакансий для аналитика данных с использованием Python?
+
+# Сколько вакансий, которые вам нравятся?
+import pandas as pd
+import_csv = pd.read_csv('vacancy.csv', delimiter=',', index_col='vactitle')
+finding_string1 = 'Бизнес-аналитик'
+finding_string2 = 'Системный аналитик'
+find_index1 = import_csv.loc[finding_string1]
+find_index2 = import_csv.loc[finding_string2]
+sum_count_find_index = len(find_index1) + len(find_index2)
+print(sum_count_find_index)
+
+# За какие периоды эти вакансии?
+import pandas as pd, numpy as np
+import_csv = pd.read_csv('vacancy.csv', delimiter=',', index_col='vactitle', names = ['id','created_at','updated_at','vacid','vactitle','vacdescription','vacdate','vacstatus','vaclink','vachtml'])
+finding_string1 = 'Бизнес-аналитик'
+finding_string2 = 'Системный аналитик'
+find_index1 = import_csv.loc[finding_string1]
+find_index2 = import_csv.loc[finding_string2]
+print(find_index1['created_at'])
+print(find_index2['created_at'])
+
+# Сколько вакансий с такими позициями, на которых вы работаете?
+import pandas as pd
+import_csv = pd.read_csv('vacancy.csv', delimiter=',', index_col='vactitle')
+finding_string1 = 'Главный инженер по разработке'
+find_index1 = import_csv.loc[finding_string1]
+sum_count_find_index = len(find_index1)
+print(sum_count_find_index)
+
+# Сколько вакансий для аналитика данных?
+import pandas as pd
+import_csv = pd.read_csv('vacancy.csv', delimiter=',', index_col='vactitle')
+finding_string1 = 'Аналитик данных'
+find_index1 = import_csv.loc[finding_string1]
+sum_count_find_index = len(find_index1)
+print(sum_count_find_index)
+
+# Сколько вакансий для аналитика данных с использованием Python?
+
+import pandas as pd
+import_csv = pd.read_csv('vacancy.csv', delimiter=',', index_col='vactitle', names = ['id','created_at','updated_at','vacid','vactitle','vacdescription','vacdate','vacstatus','vaclink','vachtml'])
+finding_string1 = 'Аналитик данных'
+find_index1 = import_csv.loc[finding_string1]
+title_descrip = (find_index1['vacdescription'])
+contain_word_python = title_descrip.str.contains('Python')
+count_contain_word_python = len(contain_word_python)
+print(count_contain_word_python)
